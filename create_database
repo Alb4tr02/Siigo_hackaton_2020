@@ -1,0 +1,52 @@
+CREATE DATABASE SIIGO;
+USE DATABASE SIIGO;
+CREATE TABLE ac_tenant
+(
+id INT, name VARCHAR(100),
+CONSTRAINT ac_tenant_pk PRIMARY KEY (id)
+);
+CREATE TABLE ac_products
+(
+id INT, tenant_id INT,
+name VARCHAR(100),
+description TEXT,
+list_price FLOAT(8),
+CONSTRAINT ac_products_pk PRIMARY KEY (id),
+FOREIGN KEY (tenant_id) REFERENCES ac_tenant(id)
+);
+CREATE TABLE customer
+(
+id INT,
+tenant_id INT,
+first_name VARCHAR(100),
+last_name VARCHAR(100),
+CONSTRAINT customer_pk PRIMARY KEY (id),
+FOREIGN KEY (tenant_id) REFERENCES ac_tenant(id)
+);
+CREATE TABLE ac_invoices
+(
+id INT,
+tenant_id INT,
+customer_id INT,
+doc_date VARCHAR(100),
+doc_number VARCHAR(100),
+total_discount INT,
+total_tax INT, total_value INT,
+CONSTRAINT ac_invoices_pk PRIMARY KEY (id),
+FOREIGN KEY (tenant_id) REFERENCES ac_tenant(id),
+FOREIGN KEY (customer_id) REFERENCES customer(id)
+);
+CREATE TABLE ac_invoice_items
+(
+id INT,
+tenant_id INT,
+product_id INT,
+invoice_id INT,
+quantity  FLOAT(8),
+unit_value FLOAT(8),
+item_value FLOAT(8),
+CONSTRAINT ac_invoice_items_pk PRIMARY KEY (id),
+FOREIGN KEY (tenant_id) REFERENCES ac_tenant(id),
+FOREIGN KEY (product_id) REFERENCES ac_products(id),
+FOREIGN KEY (invoice_id) REFERENCES ac_invoices(id)
+);
