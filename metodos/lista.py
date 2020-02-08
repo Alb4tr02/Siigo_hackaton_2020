@@ -4,6 +4,7 @@ import MySQLdb
 
 
 def list_table_id(table="*", id=""):
+       params = ["id", "tenant_id", "name", "description", "list_price"]
        db = MySQLdb.connect(host="localhost", user="electros", passwd="electros", db="siigo")
        cursor = db.cursor()
        query = "SELECT * FROM " + table
@@ -20,5 +21,13 @@ def list_table_id(table="*", id=""):
               if (len(id) != 0):
                      query = "SELECT * FROM " + table + " WHERE id = " + id
               table = cursor.execute(query)
+              total = {}
               for row in range(table):
-                     print (cursor.fetchone())
+                     response = {}
+                     i = 0
+                     aux = list(cursor.fetchone())
+                     for value in aux:
+                            response[params[i]] = aux[i]
+                            i = i +  1
+                     total[aux[0]] = response
+              return total
