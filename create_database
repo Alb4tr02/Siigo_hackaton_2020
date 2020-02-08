@@ -1,4 +1,5 @@
-CREATE IF NOT EXISTS DATABASE SIIGO;
+-- Script for mysql that create the database SIIGO and multiple tables
+CREATE DATABASE IF NOT EXISTS SIIGO;
 USE SIIGO;
 CREATE TABLE ac_tenant
 (
