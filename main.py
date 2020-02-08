@@ -2,6 +2,7 @@
 from metodos.lista import *
 from metodos.crear import *
 from metodos.delete import *
+from metodos.update import *
 
 print("todos")
 list_table_id()
@@ -16,3 +17,6 @@ list_table_id("customer", "1")
 print("--------------------------------------------------")
 print("Todos")
 list_table_id()
+update_table(1, 'customer', 'FIRST_NAME=Tony, LAST_NAME=Stark')
+print("Update")
+list_table_id("customer", "1")

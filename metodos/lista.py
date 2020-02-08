@@ -1,11 +1,11 @@
-#!/usr/bin/python3
+#!/usr/bin/env python3
 
 import MySQLdb
 
-db = MySQLdb.connect(host="localhost", user="electros", passwd="electros", db="siigo")
-cursor = db.cursor()
 
 def list_table_id(table="*", id=""):
+       db = MySQLdb.connect(host="localhost", user="electros", passwd="electros", db="siigo")
+       cursor = db.cursor()
        query = "SELECT * FROM " + table
        if (table == "*"):
               query = "SELECT TABLE_NAME FROM  INFORMATION_SCHEMA.tables WHERE TABLE_SCHEMA='siigo';"
