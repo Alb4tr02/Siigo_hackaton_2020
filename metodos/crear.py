@@ -50,9 +50,8 @@ def crear_ac_tenant(ID, NAME):
     db.commit()
 
 def crear_customer(ID, TENANT_ID, FIRST_NAME, LAST_NAME):
-    command = "INSERT INTO customer(ID, TENANT_ID, FIRST_NAME, LAST_NAME)) "
+    command = "INSERT INTO customer(ID, TENANT_ID, FIRST_NAME, LAST_NAME) "
     values = "VALUES ({}, {}, '{}', '{}');".format(ID, TENANT_ID, FIRST_NAME, LAST_NAME)
     command += values
     cursor.execute(command)
     db.commit()
-    db.close()
