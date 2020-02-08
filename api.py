@@ -1,11 +1,12 @@
 from flask import Flask
 from flask import jsonify
+from metodos.lista import *
 
 app = Flask(__name__)
 
 @app.route('/api/v1/products', methods=['GET'])
 def get_products():
-    response = {'message': 'success'}
+    response = list_table_id("ac_products")
     return jsonify(response)
 
 @app.route('/api/v1/products/<id>', methods=['GET'])
