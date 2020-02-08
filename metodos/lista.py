@@ -2,42 +2,23 @@
 
 import MySQLdb
 
-db = MySQLdb.connect(host="localhost", user="root", passwd="electros", db="siigo")
+db = MySQLdb.connect(host="localhost", user="electros", passwd="electros", db="siigo")
 cursor = db.cursor()
 
-def list_ac_invoice_items():
-       table = cursor.execute("SELECT * FROM ac_invoice_items")
-       for row in range(table):
-              print (cursor.fetchone())
-
-def list_ac_invoices():
-       table = cursor.execute("SELECT * FROM ac_invoices")
-       for row in range(table):
-              print (cursor.fetchone())
-
-def list_ac_products():
-       table = cursor.execute("SELECT * FROM ac_products")
-       for row in range(table):
-              print (cursor.fetchone())
-
-def list_ac_tenant():
-       table = cursor.execute("SELECT * FROM ac_tenant")
-       for row in range(table):
-              print (cursor.fetchone())
-
-def list_customer():
-       table = cursor.execute("SELECT * FROM customer")
-       for row in range(table):
-              print (cursor.fetchone())
-
-def list_all():
-       print("Table : ac_invoice_items")
-       list_ac_invoice_items()
-       print("Table : ac_invoice")
-       list_ac_invoices()
-       print("Table : ac_products")
-       list_ac_products()
-       print("Table : ac_tenant")
-       list_ac_tenant()
-       print("Table : customer")
-       list_customer()
+def list_table_id(table="*", id=""):
+       query = "SELECT * FROM " + table
+       if (table == "*"):
+              query = "SELECT TABLE_NAME FROM  INFORMATION_SCHEMA.tables WHERE TABLE_SCHEMA='siigo';"
+              table = cursor.execute(query)
+              tables = []
+              for row in range(table):
+                     table_name = list(cursor.fetchone())
+                     tables.append(str(table_name[0]))
+              for name in tables:
+                     list_table_id(name, "")
+       else:
+              if (len(id) != 0):
+                     query = "SELECT * FROM " + table + " WHERE id = " + id
+              table = cursor.execute(query)
+              for row in range(table):
+                     print (cursor.fetchone())
