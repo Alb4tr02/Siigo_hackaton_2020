@@ -1,21 +1,24 @@
 -- Script for mysql that create the database SIIGO and multiple tables
-CREATE DATABASE IF NOT EXISTS SIIGO;
-USE SIIGO;
-CREATE TABLE ac_tenant
+CREATE USER IF NOT EXISTS 'electros'@'localhost' IDENTIFIED BY 'electros';
+CREATE DATABASE IF NOT EXISTS siigo;
+USE siigo;
+CREATE TABLE IF NOT EXISTS ac_tenant
 (
-id INT, name VARCHAR(100),
+id INT,
+name VARCHAR(100),
 CONSTRAINT ac_tenant_pk PRIMARY KEY (id)
 );
-CREATE TABLE ac_products
+CREATE TABLE IF NOT EXISTS ac_products
 (
-id INT, tenant_id INT,
+id INT,
+tenant_id INT,
 name VARCHAR(100),
 description TEXT,
 list_price FLOAT(8),
 CONSTRAINT ac_products_pk PRIMARY KEY (id),
 FOREIGN KEY (tenant_id) REFERENCES ac_tenant(id)
 );
-CREATE TABLE customer
+CREATE TABLE IF NOT EXISTS customer
 (
 id INT,
 tenant_id INT,
@@ -24,7 +27,7 @@ last_name VARCHAR(100),
 CONSTRAINT customer_pk PRIMARY KEY (id),
 FOREIGN KEY (tenant_id) REFERENCES ac_tenant(id)
 );
-CREATE TABLE ac_invoices
+CREATE TABLE IF NOT EXISTS ac_invoices
 (
 id INT,
 tenant_id INT,
@@ -37,7 +40,7 @@ CONSTRAINT ac_invoices_pk PRIMARY KEY (id),
 FOREIGN KEY (tenant_id) REFERENCES ac_tenant(id),
 FOREIGN KEY (customer_id) REFERENCES customer(id)
 );
-CREATE TABLE ac_invoice_items
+CREATE TABLE IF NOT EXISTS ac_invoice_items
 (
 id INT,
 tenant_id INT,
@@ -51,3 +54,5 @@ FOREIGN KEY (tenant_id) REFERENCES ac_tenant(id),
 FOREIGN KEY (product_id) REFERENCES ac_products(id),
 FOREIGN KEY (invoice_id) REFERENCES ac_invoices(id)
 );
+GRANT ALL PRIVILEGES ON siigo.* TO 'electros'@'localhost';
+FLUSH PRIVILEGES;
