@@ -12,7 +12,7 @@ def update_table(table_name, id, data):
             cursor.execute(command)
         db.commit()
         db.close()
-        return {'message': 'Update {} in table {} with {}'.format(id, table_name, data)}
+        return {'message': 'Update {} in table {} with id={}'.format(id, table_name, data)}
     except:
         db.close()
         return {'error': 'Can not update an unexisting id'}

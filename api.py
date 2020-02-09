@@ -24,7 +24,7 @@ def post_row(table_name):
     response = insert_into_table(table_name, data)
     return jsonify(response)
 
-@app.route('/api/v1/<table_name>/<id>', methods=['PUT'])
+@app.route('/api/v1/<table_name>/id=<id>', methods=['PUT'])
 def update_product(id, table_name):
     data = request.form
     response = update_table(table_name, id, data)
