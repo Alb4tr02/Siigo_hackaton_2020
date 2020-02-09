@@ -24,4 +24,4 @@ def update_table(ID, TABLE, PARAMS):
         return {'message': 'Update {} in table {} with {}'.format(ID, TABLE, PARAMS)}
     except:
         db.close()
-        return {'message': 'Can not update an unexisting id'}
+        return {'error': 'Can not update an unexisting id'}
