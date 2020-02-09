@@ -3,6 +3,7 @@ from flask import jsonify
 from flask import request
 from metodos.lista import *
 from metodos.crear import *
+from metodos.delete import *
 
 app = Flask(__name__)
 
@@ -27,9 +28,9 @@ def update_product(id):
     response = {'message': 'success'}
     return jsonify(response)
 
-@app.route('/api/v1/products/<id>', methods=['DELETE'])
-def delete_product(id):
-    response = {'message': 'success'}
+@app.route('/api/v1/<table_name>/id=<id>', methods=['DELETE'])
+def delete_row_by_id(table_name, id):
+    response = delete_row(table_name, id)
     return jsonify(response)
 
 if __name__ == '__main__':
