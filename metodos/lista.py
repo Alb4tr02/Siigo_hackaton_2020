@@ -1,6 +1,8 @@
 #!/usr/bin/env python3
 
 import MySQLdb
+
+
 def get_params(table_name):
        db = MySQLdb.connect(host="localhost", user="electros", passwd="electros", db="siigo")
        cursor = db.cursor()
