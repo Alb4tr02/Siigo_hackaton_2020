@@ -19,9 +19,7 @@ def get_row_id(table_name, id):
 @app.route('/api/v1/<table_name>', methods=['POST'])
 def post_row(table_name):
     data = request.form
-    #falta crear funcion para verificar la validez de las claves primarias y foraneas
-    insert_into_table(table_name, data)
-    response = {'message': 'success'}
+    response = insert_into_table(table_name, data)
     return jsonify(response)
 
 @app.route('/api/v1/products/<id>', methods=['PUT'])
