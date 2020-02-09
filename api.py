@@ -22,9 +22,9 @@ def post_row(table_name):
     response = insert_into_table(table_name, data)
     return jsonify(response)
 
-@app.route('/api/v1/products/<id>', methods=['PUT'])
-def update_product(id):
-    response = {'message': 'success'}
+@app.route('/api/v1/<table_name>/<id>', methods=['POST'])
+def update_product(id, table_name, data):
+    response = update_table(id, table_name, data)
     return jsonify(response)
 
 @app.route('/api/v1/products/<id>', methods=['DELETE'])
