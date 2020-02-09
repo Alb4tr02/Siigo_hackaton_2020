@@ -16,12 +16,11 @@ def get_row_id(table_name, id):
     response = list_table_id(table_name, id)
     return jsonify(response)
 
-
-@app.route('/api/v1/products', methods=['POST'])
-def create_product():
+@app.route('/api/v1/<table_name>', methods=['POST'])
+def post_row(table_name):
     data = request.form
     #falta crear funcion para verificar la validez de las claves primarias y foraneas
-    crear_ac_products(data)
+    insert_into_table(table_name, data)
     response = {'message': 'success'}
     return jsonify(response)
 
