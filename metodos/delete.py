@@ -14,4 +14,4 @@ def delete_row(ID, TABLE):
         return {'message': 'Delete {} on table: {}'.format(ID, TABLE)}
     except:
         db.close()
-        return {'message': 'Can not delete an unexisting id'}
+        return {'error': 'Can not delete an unexisting id'}

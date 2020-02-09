@@ -31,15 +31,18 @@ def list_all_table(table_name):
        return total
 
 def list_table_id(table_name, id):
-       params = get_params(table_name)
-       db = MySQLdb.connect(host="localhost", user="electros", passwd="electros", db="siigo")
-       cursor = db.cursor()
-       query = "SELECT * FROM " + table_name + " WHERE id = " + id
-       table = cursor.execute(query)
-       response = {}
-       aux = list(cursor.fetchone())
-       i = 0
-       for value in aux:
-              response[params[i]] = aux[i]
-              i = i +  1
-       return response
+       try:
+              params = get_params(table_name)
+              db = MySQLdb.connect(host="localhost", user="electros", passwd="electros", db="siigo")
+              cursor = db.cursor()
+              query = "SELECT * FROM " + table_name + " WHERE id = " + id
+              table = cursor.execute(query)
+              response = {}
+              aux = list(cursor.fetchone())
+              i = 0
+              for value in aux:
+                     response[params[i]] = aux[i]
+                     i = i +  1
+              return response
+       except:
+              return {'error': 'Can not show this id {} on the table {} because it does not exist'.format(id, table_name)}
