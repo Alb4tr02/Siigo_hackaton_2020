@@ -20,5 +20,5 @@ def insert_into_table(table_name, data):
         db.close()
         return {'message': "success creating {} on {}".format(data, table_name)}
     except:
-        return {'message': 'Missing foreign key'}
         db.close()
+        return {'message': 'Missing foreign key'}
