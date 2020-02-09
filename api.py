@@ -4,6 +4,7 @@ from flask import request
 from metodos.lista import *
 from metodos.crear import *
 from metodos.delete import *
+from metodos.update import *
 
 app = Flask(__name__)
 
@@ -23,9 +24,10 @@ def post_row(table_name):
     response = insert_into_table(table_name, data)
     return jsonify(response)
 
-@app.route('/api/v1/<table_name>/<id>', methods=['POST'])
-def update_product(id, table_name, data):
-    response = update_table(id, table_name, data)
+@app.route('/api/v1/<table_name>/<id>', methods=['PUT'])
+def update_product(id, table_name):
+    data = request.form
+    response = update_table(table_name, id, data)
     return jsonify(response)
 
 @app.route('/api/v1/<table_name>/id=<id>', methods=['DELETE'])
